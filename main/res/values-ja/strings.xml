@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<!-- For ActivityHelper -->
+	<string name="cant_resolve_intent_title">%sが必要です。</string>
+	<string name="cant_resolve_intent_message">Marketからダウンロードしますか？</string>
+	<string name="go_market">する</string>
+	<string name="ignore">やめとく</string>
+</resources>
