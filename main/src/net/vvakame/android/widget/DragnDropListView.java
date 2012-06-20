@@ -1,6 +1,11 @@
 package net.vvakame.android.widget;
 
+import net.vvakame.android.R;
+import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -26,9 +31,9 @@ public class DragnDropListView extends ListView {
 	private static final int SCROLL_SPEED_SLOW = 8;
 
 	private boolean sortMode = false;
-	private DragListener mDrag = new DragListenerImpl();
-	private DropListener mDrop = new DropListenerImpl();
-	private RemoveListener mRemove = new RemoveListenerImpl();
+	private OnDragListener mDrag = new OnDragListenerImpl();
+	private OnDropListener mDrop = new OnDropListenerImpl();
+	private OnRemoveListener mRemove = new OnRemoveListenerImpl();
 
 	public DragnDropListView(Context context, AttributeSet attrs) {
 		this(context, attrs, 0);
@@ -36,6 +41,20 @@ public class DragnDropListView extends ListView {
 
 	public DragnDropListView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
+
+		TypedArray tArray = context.obtainStyledAttributes(attrs,
+				R.styleable.DragnDropListView);
+
+		mFixedX = tArray
+				.getBoolean(R.styleable.DragnDropListView_fixedX, false);
+		mFixedY = tArray
+				.getBoolean(R.styleable.DragnDropListView_fixedY, false);
+		mOnHoverColorStart = tArray.getColor(
+				R.styleable.DragnDropListView_onHoverColorStart, 0x40ff0000);
+		mOnHoverColorEnd = tArray.getColor(
+				R.styleable.DragnDropListView_onHoverColorEnd, 0x00ff0000);
+		mOnHoverDuration = tArray.getColor(
+				R.styleable.DragnDropListView_onHoverDuration, 500);
 	}
 
 	private Bitmap mDragBitmap = null;
@@ -45,6 +64,14 @@ public class DragnDropListView extends ListView {
 
 	private View mRemoveTile = null;
 	private Rect mRemoveHit = null;
+
+	private boolean mFixedX;
+	private boolean mFixedY;
+	private int mOnHoverColorStart;
+	private int mOnHoverColorEnd;
+	private int mOnHoverDuration;
+
+	private View mCurrentBling;
 
 	@Override
 	public boolean onTouchEvent(MotionEvent ev) {
@@ -115,13 +142,26 @@ public class DragnDropListView extends ListView {
 				} else {
 					mDragView.setVisibility(View.VISIBLE);
 				}
-				mWindowParams.x = getLeft() + x - 130;
-				mWindowParams.y = getTop() + y - 32;
-				wm = (WindowManager) getContext().getSystemService("window");
+				if (!mFixedX) {
+					mWindowParams.x = getLeft() + x - 130;
+				}
+				if (!mFixedY) {
+					mWindowParams.y = getTop() + y - 32;
+				}
+
+				wm = (WindowManager) getContext().getSystemService(
+						Context.WINDOW_SERVICE);
 				wm.updateViewLayout(mDragView, mWindowParams);
 
+				index = pointToIndex(ev);
+				blingView(getChildByIndex(index));
+
+				Rect rect = new Rect();
+				mRemoveTile.getGlobalVisibleRect(rect);
+				if (rect.contains((int) ev.getRawX(), (int) ev.getRawY())) {
+					blingView(mRemoveTile);
+				}
 				if (mDrag != null) {
-					index = pointToIndex(ev);
 					mDrag.drag(mFrom, index);
 				}
 
@@ -133,7 +173,7 @@ public class DragnDropListView extends ListView {
 		case MotionEvent.ACTION_UP:
 
 			if (mRemove != null && mRemoveTile != null
-					&& mRemoveTile.getVisibility() == View.VISIBLE) {
+					|| mRemoveTile.getVisibility() == View.VISIBLE) {
 				if (mRemoveHit == null) {
 					mRemoveHit = new Rect();
 				}
@@ -172,6 +212,17 @@ public class DragnDropListView extends ListView {
 		}
 
 		return super.onTouchEvent(ev);
+	}
+
+	void blingView(final View view) {
+		if (view != null && mCurrentBling != view) {
+			ValueAnimator animator = ObjectAnimator.ofObject(view,
+					"backgroundColor", new ArgbEvaluator(), mOnHoverColorStart,
+					mOnHoverColorEnd);
+			animator.setDuration(mOnHoverDuration);
+			animator.start();
+			mCurrentBling = view;
+		}
 	}
 
 	private void startDrag(MotionEvent ev) {
@@ -228,31 +279,31 @@ public class DragnDropListView extends ListView {
 		mRemoveTile = v;
 	}
 
-	public void setOnDragListener(DragListener listener) {
+	public void setOnDragListener(OnDragListener listener) {
 		mDrag = listener;
 	}
 
-	public void setOnDropListener(DragListener listener) {
-		mDrag = listener;
+	public void setOnDropListener(OnDropListener listener) {
+		mDrop = listener;
 	}
 
-	public void setOnRemoveListener(RemoveListener listener) {
+	public void setOnRemoveListener(OnRemoveListener listener) {
 		mRemove = listener;
 	}
 
-	public interface DragListener {
+	public interface OnDragListener {
 		public void drag(int from, int to);
 	}
 
-	public interface DropListener {
+	public interface OnDropListener {
 		public void drop(int from, int to);
 	}
 
-	public interface RemoveListener {
+	public interface OnRemoveListener {
 		public void remove(int which);
 	}
 
-	class DragListenerImpl implements DragListener {
+	class OnDragListenerImpl implements OnDragListener {
 		public void drag(int from, int to) {
 			if (DEBUG) {
 				Log.d(TAG, "DragListenerImpl drag event. from=" + from
@@ -261,7 +312,7 @@ public class DragnDropListView extends ListView {
 		}
 	}
 
-	public class DropListenerImpl implements DropListener {
+	public class OnDropListenerImpl implements OnDropListener {
 		@SuppressWarnings("unchecked")
 		public void drop(int from, int to) {
 			if (DEBUG) {
@@ -284,7 +335,7 @@ public class DragnDropListView extends ListView {
 		}
 	}
 
-	public class RemoveListenerImpl implements RemoveListener {
+	public class OnRemoveListenerImpl implements OnRemoveListener {
 		@SuppressWarnings("unchecked")
 		public void remove(int which) {
 			if (DEBUG) {

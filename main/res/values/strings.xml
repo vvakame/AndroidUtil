@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<!-- For ActivityHelper -->
-	<string name="cant_resolve_intent_title">Need %s</string>
-	<string name="cant_resolve_intent_message">Do you want download it from Market?</string>
-	<string name="go_market">Go market</string>
-	<string name="ignore">ignore</string>
+
+    <!-- For ActivityHelper -->
+    <string name="cant_resolve_intent_title">Need %s</string>
+    <string name="cant_resolve_intent_message">Do you want download it from Market?</string>
+    <string name="go_market">Go market</string>
+    <string name="ignore">ignore</string>
+
+    <!-- For AppListFragment -->
+    <string name="app_icon_description">application icon</string>
+    <string name="loading">Now loading</string>
+
+    <!-- For NFCFragment -->
+    <string name="tag_write_error_undefined">TAG format by NDEF. Please try again.</string>
+
 </resources>

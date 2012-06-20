@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<!-- For ActivityHelper -->
-	<string name="cant_resolve_intent_title">%sが必要です。</string>
-	<string name="cant_resolve_intent_message">Marketからダウンロードしますか？</string>
-	<string name="go_market">する</string>
-	<string name="ignore">やめとく</string>
+
+    <!-- For ActivityHelper -->
+    <string name="cant_resolve_intent_title">%sが必要です。</string>
+    <string name="cant_resolve_intent_message">Marketからダウンロードしますか？</string>
+    <string name="go_market">する</string>
+    <string name="ignore">やめとく</string>
+
+    <!-- For AppListFragment -->
+    <string name="app_icon_description">アプリアイコン</string>
+    <string name="loading">Now loading</string>
+
+    <!-- For NFCFragment -->
+    <string name="tag_write_error_undefined">タグを初期化しました. もう一度試してみてください.</string>
+
 </resources>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="SlidingView">
+        <attr name="rightspace" format="dimension" />
+    </declare-styleable>
+    <declare-styleable name="DragnDropListView">
+        <attr name="fixedX" format="boolean" />
+        <attr name="fixedY" format="boolean" />
+        <attr name="onHoverColorStart" format="color" />
+        <attr name="onHoverColorEnd" format="color" />
+        <attr name="onHoverDuration" format="integer" />
+    </declare-styleable>
+
+</resources>
