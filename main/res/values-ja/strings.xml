@@ -14,4 +14,8 @@
     <!-- For NFCFragment -->
     <string name="tag_write_error_undefined">タグを初期化しました. もう一度試してみてください.</string>
 
+    <!-- NsdServiceListFragment -->
+    <string name="service_name">サービス名</string>
+    <string name="service_not_found">接続できるサービスが存在しません</string>
+
 </resources>

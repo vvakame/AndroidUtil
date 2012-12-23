@@ -14,4 +14,8 @@
     <!-- For NFCFragment -->
     <string name="tag_write_error_undefined">TAG format by NDEF. Please try again.</string>
 
+    <!-- NsdServiceListFragment -->
+    <string name="service_name">service name</string>
+    <string name="service_not_found">service not found</string>
+
 </resources>
