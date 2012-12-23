@@ -1,4 +1,4 @@
-package net.vvakame.android.beam;
+package net.vvakame.android.fragment.beam;
 
 import java.nio.charset.Charset;
 

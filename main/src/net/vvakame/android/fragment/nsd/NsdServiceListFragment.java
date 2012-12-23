@@ -1,4 +1,4 @@
-package net.vvakame.android.nsd;
+package net.vvakame.android.fragment.nsd;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package net.vvakame.androidwifidirect;
+package net.vvakame.android.fragment.wifidirect;
 
 import java.io.Closeable;
 import java.io.InputStream;

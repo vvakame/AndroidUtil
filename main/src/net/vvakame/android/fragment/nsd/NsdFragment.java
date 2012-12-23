@@ -1,4 +1,4 @@
-package net.vvakame.android.nsd;
+package net.vvakame.android.fragment.nsd;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -1,9 +1,9 @@
-package net.vvakame.android.applist;
+package net.vvakame.android.fragment.applist;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import net.vvakame.android.applist.ApplicationListFragment.AppData;
+import net.vvakame.android.fragment.applist.ApplicationListFragment.AppData;
 import android.annotation.TargetApi;
 import android.content.AsyncTaskLoader;
 import android.content.Context;

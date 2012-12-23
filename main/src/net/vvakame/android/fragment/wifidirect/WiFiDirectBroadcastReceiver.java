@@ -1,4 +1,4 @@
-package net.vvakame.androidwifidirect;
+package net.vvakame.android.fragment.wifidirect;
 
 import android.annotation.TargetApi;
 import android.content.BroadcastReceiver;

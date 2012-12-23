@@ -1,4 +1,4 @@
-package net.vvakame.android.applist;
+package net.vvakame.android.fragment.applist;
 
 import java.text.Collator;
 import java.util.Collections;

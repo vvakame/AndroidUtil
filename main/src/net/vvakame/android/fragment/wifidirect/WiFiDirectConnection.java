@@ -1,4 +1,4 @@
-package net.vvakame.androidwifidirect;
+package net.vvakame.android.fragment.wifidirect;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -9,8 +9,8 @@ import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import net.vvakame.androidwifidirect.WiFiDirectFragment.Type;
-import net.vvakame.androidwifidirect.WiFiDirectFragment.WiFiDirectCallback;
+import net.vvakame.android.fragment.wifidirect.WiFiDirectFragment.Type;
+import net.vvakame.android.fragment.wifidirect.WiFiDirectFragment.WiFiDirectCallback;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;

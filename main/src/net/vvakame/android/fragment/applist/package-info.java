@@ -2,5 +2,5 @@
  * Androidにインストールされているアプリの一覧を表示するためのFragment。<br>
  * ぶっちゃけあんまり使わないんじゃないですか…。
  */
-package net.vvakame.android.applist;
+package net.vvakame.android.fragment.applist;
 
