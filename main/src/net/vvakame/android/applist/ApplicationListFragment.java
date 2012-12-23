@@ -1,4 +1,4 @@
-package net.vvakame.android.fragment;
+package net.vvakame.android.applist;
 
 import java.text.Collator;
 import java.util.Collections;
@@ -6,7 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import net.vvakame.android.R;
-import net.vvakame.android.loader.ApplicationListLoader;
+import net.vvakame.android.fragment.CustomListFragment;
 import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.Context;

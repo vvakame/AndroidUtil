@@ -1,4 +1,4 @@
-package net.vvakame.android.fragment;
+package net.vvakame.android.nfc;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
