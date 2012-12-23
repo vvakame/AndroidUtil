@@ -97,10 +97,14 @@ public class AndroidUtil {
 	}
 
 	public static void copyFile(File src, File dest) throws IOException {
-		FileChannel srcChannel = new FileInputStream(src).getChannel();
-		FileChannel destChannel = new FileOutputStream(dest).getChannel();
+		FileInputStream fileInputStream = new FileInputStream(src);
+		FileChannel srcChannel = fileInputStream.getChannel();
+		FileOutputStream fileOutputStream = new FileOutputStream(dest);
+		FileChannel destChannel = fileOutputStream.getChannel();
 		srcChannel.transferTo(0, srcChannel.size(), destChannel);
 		srcChannel.close();
 		destChannel.close();
+		fileInputStream.close();
+		fileOutputStream.close();
 	}
 }
