@@ -7,11 +7,13 @@ import java.util.List;
 
 import net.vvakame.android.R;
 import net.vvakame.android.fragment.CustomListFragment;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Loader;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +23,7 @@ import android.widget.ListView;
 
 import com.androidquery.AQuery;
 
+@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class ApplicationListFragment extends CustomListFragment {
 
 	public static interface ApplicationEventCallbackPicker {

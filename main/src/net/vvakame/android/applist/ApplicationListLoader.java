@@ -4,13 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.vvakame.android.applist.ApplicationListFragment.AppData;
+import android.annotation.TargetApi;
 import android.content.AsyncTaskLoader;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 
+@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class ApplicationListLoader extends AsyncTaskLoader<List<AppData>> {
 
 	PackageManager mPm;

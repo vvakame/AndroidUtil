@@ -7,6 +7,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
@@ -15,15 +16,17 @@ import android.net.nsd.NsdManager.DiscoveryListener;
 import android.net.nsd.NsdManager.RegistrationListener;
 import android.net.nsd.NsdManager.ResolveListener;
 import android.net.nsd.NsdServiceInfo;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 
 /**
  * NSD 周りの管理を行う {@link Fragment}。自身のポートを開いてサービスとして登録、他サービスの発見、接続などを行う。
- * 
+ * 一回切断するたびに、一回Fragmentを捨てたほうがいいです。(上手いこと再接続できない…)
  * @author vvakame
  */
+@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 public class NsdFragment extends Fragment {
 
 	public static final String TAG = NsdFragment.class.getSimpleName();

@@ -1,4 +1,4 @@
-package net.vvakame.android.helper;
+package net.vvakame.android.util;
 
 import net.vvakame.android.R;
 import android.app.AlertDialog;

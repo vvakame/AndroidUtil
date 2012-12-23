@@ -7,6 +7,7 @@ import java.util.Locale;
 
 import net.vvakame.android.R;
 import net.vvakame.android.util.NfcUtil;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.PendingIntent;
@@ -19,9 +20,23 @@ import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.nfc.tech.Ndef;
 import android.nfc.tech.NdefFormatable;
+import android.os.Build;
 import android.util.Log;
 import android.widget.Toast;
 
+/**
+ * NFCを簡単に扱うためのFragment。<br>
+ * {@link Activity} に {@link NfcActionCallbackPicker} を実装し、
+ * {@link NfcActionCallback} を何かに実装して返してあげてください。<br>
+ * 後は、コールバックの引数や返り値にあった処理を実装するだけでOKです。<br>
+ * {@link NfcActionCallback#onTagArrival(NdefBuilderBase)} で利用する
+ * {@link NdefBuilderBase} について少し解説しておきます。<br>
+ * {@link NdefBuilderBase} はNDEF未初期化でも、NDEF書込可能なタグでも透過的に扱えるようにしたラッパクラスです。<br>
+ * 可能なのは、タグのサイズの読取りと読込専用タグにすることと、書込するNdefMessageを指定することだけです。
+ * 
+ * @author vvakame
+ */
+@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class NfcFragment extends Fragment {
 
 	static final String TAG = NfcFragment.class.getSimpleName();

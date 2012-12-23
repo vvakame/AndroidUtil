@@ -3,6 +3,7 @@ package net.vvakame.android.beam;
 import java.nio.charset.Charset;
 
 import net.vvakame.android.R;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
@@ -11,10 +12,10 @@ import android.nfc.NfcAdapter;
 import android.nfc.NfcAdapter.CreateNdefMessageCallback;
 import android.nfc.NfcAdapter.OnNdefPushCompleteCallback;
 import android.nfc.NfcEvent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.Message;
 import android.os.Parcelable;
 import android.provider.Settings;
 import android.view.Menu;
@@ -22,10 +23,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 /**
- * Beamを簡単に扱うためのFragment.
+ * Beamを簡単に扱うためのFragment。<br>
+ * {@link Activity} に {@link BeamActionCallbackPicker} を実装し、
+ * {@link BeamActionCallback} を何かに実装して返しあげてください。<br>
+ * 後は、コールバックの引数や返り値にあった処理を実装するだけでOKです。
  * 
  * @author vvakame
  */
+@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 public class BeamFragment extends Fragment implements
 		CreateNdefMessageCallback, OnNdefPushCompleteCallback {
 
@@ -65,6 +70,8 @@ public class BeamFragment extends Fragment implements
 	NfcAdapter mNfcAdapter;
 
 	BeamActionCallback mCallback;
+
+	Handler mHandler = new Handler(Looper.getMainLooper());
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -109,13 +116,12 @@ public class BeamFragment extends Fragment implements
 	 */
 	@Override
 	public void onNdefPushComplete(NfcEvent event) {
-		new Handler(Looper.getMainLooper()) {
+		mHandler.post(new Runnable() {
 			@Override
-			public void dispatchMessage(Message msg) {
+			public void run() {
 				mCallback.onBeamSendComplete();
 			}
-
-		}.sendEmptyMessage(0);
+		});
 	}
 
 	int mIntentHashCode = 0;
@@ -165,10 +171,13 @@ public class BeamFragment extends Fragment implements
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (R.id.beam_settings == item.getItemId()) {
-			// 下記でBeamのON/OFF設定画面へ遷移可能だが、ICS 4.0.1 では遷移先が発見できず例外が発生する.
-			// 4.0.3 なら大丈夫.
-			// Intent intent = new Intent(Settings.ACTION_NFCSHARING_SETTINGS);
-			Intent intent = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
+			Intent intent;
+			if (Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1 <= Build.VERSION.SDK_INT) {
+				intent = new Intent(Settings.ACTION_NFCSHARING_SETTINGS);
+			} else {
+				// 下記でBeamのON/OFF設定画面へ遷移可能だが、ICS 4.0.1 では遷移先が発見できず例外が発生する.
+				intent = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
+			}
 
 			startActivity(intent);
 			return true;

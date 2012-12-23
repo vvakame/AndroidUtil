@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.vvakame.android.R;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.BroadcastReceiver;
@@ -24,6 +25,7 @@ import android.net.wifi.p2p.WifiP2pManager.Channel;
 import android.net.wifi.p2p.WifiP2pManager.ChannelListener;
 import android.net.wifi.p2p.WifiP2pManager.ConnectionInfoListener;
 import android.net.wifi.p2p.WifiP2pManager.PeerListListener;
+import android.os.Build;
 import android.os.Looper;
 import android.provider.Settings;
 import android.view.Menu;
@@ -35,6 +37,7 @@ import android.view.MenuItem;
  * 
  * @author vvakame
  */
+@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 public class WiFiDirectFragment extends Fragment implements ChannelListener,
 		ConnectionInfoListener, PeerListListener {
 

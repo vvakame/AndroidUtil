@@ -3,10 +3,12 @@ package net.vvakame.android.nsd;
 import java.util.List;
 
 import net.vvakame.android.R;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ListFragment;
 import android.content.Context;
 import android.net.nsd.NsdServiceInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,9 +19,10 @@ import android.widget.TextView;
 
 /**
  * {@link NsdServiceInfo} を一覧表示するための {@link ListFragment}。
- * 
+ * あんまり使わないほうがいいと思います。
  * @author vvakame
  */
+@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 public class NsdServiceListFragment extends ListFragment {
 	/**
 	 * コールバック取得用インタフェース。

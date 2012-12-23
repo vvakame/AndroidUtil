@@ -1,4 +1,4 @@
-package net.vvakame.android.widget;
+package net.vvakame.android.view;
 
 import net.vvakame.android.R;
 import android.animation.ArgbEvaluator;

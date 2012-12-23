@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.util.Log;
 
 /**
@@ -11,6 +13,7 @@ import android.util.Log;
  * 
  * @author vvakame
  */
+@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 class P2pServer {
 	static final String TAG = P2pServer.class.getSimpleName();
 

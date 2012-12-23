@@ -1,4 +1,4 @@
-package net.vvakame.android.helper;
+package net.vvakame.android.util;
 
 import java.io.File;
 import java.io.FileInputStream;

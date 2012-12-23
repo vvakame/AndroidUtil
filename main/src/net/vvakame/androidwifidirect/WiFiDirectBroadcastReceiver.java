@@ -1,11 +1,13 @@
 package net.vvakame.androidwifidirect;
 
+import android.annotation.TargetApi;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.NetworkInfo;
 import android.net.wifi.p2p.WifiP2pDevice;
 import android.net.wifi.p2p.WifiP2pManager;
+import android.os.Build;
 import android.util.Log;
 
 /**
@@ -13,6 +15,7 @@ import android.util.Log;
  * 
  * @author vvakame
  */
+@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 class WiFiDirectBroadcastReceiver extends BroadcastReceiver {
 
 	static final String TAG = WiFiDirectBroadcastReceiver.class.getSimpleName();
